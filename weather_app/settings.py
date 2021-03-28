@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-# from dotenv import load_dotenv
+import os
+from dotenv import load_dotenv
+weather_app = os.path.expanduser('./weather_app')
+load_dotenv(os.path.join(weather_app, 'keys.py'))
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
