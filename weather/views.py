@@ -12,6 +12,7 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 def index(request):
     url = f"http://api.openweathermap.org/data/2.5/weather?q=las%20vegas&units=imperial&appid={OPENWEATHER_API_KEY}"
     cities = City.objects.all()
+    form = CityForm()
     weather_data = []
     for city in cities:
         city_weather = requests.get(url.format(city)).json()
@@ -23,5 +24,5 @@ def index(request):
             }
     weather_data.append(weather)
     # print(weather)
-    context = {'weather_data': weather_data}
+    context = {'weather_data': weather_data, 'form' : form }
     return render(request, 'weather/index.html', context)
