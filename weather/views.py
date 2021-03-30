@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 import requests
 from .models import City
+from .forms import CityForm
 weather = os.path.expanduser('./weather')
 load_dotenv(os.path.join(weather, 'keys.py'))
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
