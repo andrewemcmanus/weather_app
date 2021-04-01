@@ -22,9 +22,10 @@
             <div class="columns">
                 <div class="column is-offset-4 is-4">
                     <form method="POST">
+                      {{ csrf_token }}
                         <div class="field has-addons">
                             <div class="control is-expanded">
-                                <input class="input" type="text" placeholder="City Name">
+                                {{ form.name }}
                             </div>
                             <div class="control">
                                 <button class="button is-info">
@@ -47,7 +48,7 @@
                             <div class="media-left">
                                 <figure class="image is-50x50">
                                   <!-- add Unsplash city images here instead? -->
-                                    <img src="http://openweathermap.org/img/w/10d.png" alt="Image">
+                                    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
