@@ -11,8 +11,9 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 # Create your views here.
 def index(request):
-    url = f"http://api.openweathermap.org/data/2.5/weather?q=las%20vegas&units=imperial&appid={OPENWEATHER_API_KEY}"
     cities = City.objects.all()
+    # print(cities)
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={}units=imperial&appid={OPENWEATHER_API_KEY}"
 
     if request.method == 'POST':
         form = CityForm(request.POST)
@@ -28,7 +29,7 @@ def index(request):
             'description': city_weather['weather'][0]['description'],
             'icon': city_weather['weather'][0]['icon']
             }
-    weather_data.append(weather)
+        weather_data.append(weather)
     # print(weather)
     context = {'weather_data': weather_data, 'form' : form }
     return render(request, 'weather/index.html', context)
