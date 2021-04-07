@@ -11,6 +11,7 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 # Create your views here.
 def index(request):
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}units=imperial&appid={OPENWEATHER_API_KEY}'
     cities = City.objects.all()
     # print(cities[1])
     # city = "Chicago"
@@ -22,7 +23,6 @@ def index(request):
     form = CityForm()
     weather_data = []
     for city in cities:
-        url = f"http://api.openweathermap.org/data/2.5/weather?q={city}units=imperial&appid={OPENWEATHER_API_KEY}"
         city_weather = requests.get(url.format(city)).json()
         print(city_weather)
         weather = {
