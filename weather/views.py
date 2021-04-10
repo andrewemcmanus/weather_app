@@ -12,10 +12,9 @@ OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 # Create your views here.
 def index(request):
     cities = City.objects.all()
-    url = f"http://api.openweathermap.org/data/2.5/weather?q=Chicago%units=imperial&appid={OPENWEATHER_API_KEY}"
+    # NOT RETURNING CORRECTLY - CHECK DJANGO API
     # print(cities[1])
     # city = "Chicago"
-
     if request.method == 'POST':
         form = CityForm(request.POST)
         form.save()
@@ -23,8 +22,10 @@ def index(request):
     form = CityForm()
     weather_data = []
     for city in cities:
+        url = f"http://api.openweathermap.org/data/2.5/weather?q={city}%units=imperial&appid={OPENWEATHER_API_KEY}"
+        # print(url)
         city_weather = requests.get(url.format(city)).json()
-        print(city_weather)
+        # print(city_weather)
         weather = {
             'city': city,
             'temperature': city_weather['main']['temp'],
