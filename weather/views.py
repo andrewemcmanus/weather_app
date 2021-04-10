@@ -8,11 +8,9 @@ weather = os.path.expanduser('./weather')
 load_dotenv(os.path.join(weather, 'keys.py'))
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
-
 # Create your views here.
 def index(request):
     cities = City.objects.all()
-    # NOT RETURNING CORRECTLY - CHECK DJANGO API
     # print(cities[1].name)
     # city = "Chicago"
     if request.method == 'POST':
@@ -24,7 +22,7 @@ def index(request):
     for city in cities:
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city.name}&appid={OPENWEATHER_API_KEY}&units=imperial"
         city_weather = requests.get(url.format(city.name)).json()
-        print(city_weather)
+        # print(city_weather)
         weather = {
             'city': city,
             'temperature': city_weather['main']['temp'],
