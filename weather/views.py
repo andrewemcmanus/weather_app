@@ -22,9 +22,8 @@ def index(request):
     form = CityForm()
     weather_data = []
     for city in cities:
-        url = f"http://api.openweathermap.org/data/2.5/weather?q={city.name}%units=imperial&appid={OPENWEATHER_API_KEY}"
-        # print(url)
-        city_weather = requests.get(url).json()
+        url = f"http://api.openweathermap.org/data/2.5/weather?q={city.name}&appid={OPENWEATHER_API_KEY}&units=imperial"
+        city_weather = requests.get(url.format(city.name)).json()
         print(city_weather)
         weather = {
             'city': city,
